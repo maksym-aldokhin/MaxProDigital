@@ -1,0 +1,31 @@
+name: RegBuild
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Configure
+      run: |
+        cmake -S . -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=ON -B build
+
+    - name: Build
+      run: |
+        cmake --build build --config Debug
+
+    - name: Test
+      run: |
+        cd build
+        ctest -C Debug --output-on-failure --verbose
