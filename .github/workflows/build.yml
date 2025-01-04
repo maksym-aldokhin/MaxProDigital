@@ -19,7 +19,7 @@ jobs:
 
     - name: Configure
       run: |
-        cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=ON
+        cmake -S . -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING=ON -B build
 
     - name: Build
       run: |
