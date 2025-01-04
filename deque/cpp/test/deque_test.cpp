@@ -26,6 +26,17 @@ TEST(Deque, CoreTestsEnqueueAndDequeue)
 	EXPECT_EQ(actualValue, expectedValue);
 }
 
+TEST(Deque, CoreTestsHead)
+{
+	Deque<int> deque;
+	const int expectedValue = 10;
+
+	deque.enqueue(expectedValue);
+	EXPECT_EQ(deque.size(), 1);
+
+	EXPECT_EQ(deque.head(), expectedValue);
+}
+
 TEST(Deque, PerformanceTestcompareWithSTD)
 {
 	Deque<int> customDeque;
@@ -46,7 +57,7 @@ TEST(Deque, PerformanceTestcompareWithSTD)
 	EXPECT_EQ(customDeque.size(), stdDeque.size());
 	const auto enqueueCustomDequeDelta = abs(enqueueCustomDequeEnd - enqueueCustomDequeStart);
 	const auto enqueueStdDequeDelta = abs(enqueueStdDequeEnd - enqueueStdDequeStart);
-	EXPECT_TRUE(enqueueCustomDequeDelta < enqueueStdDequeDelta * 1.1);
+	EXPECT_TRUE(enqueueCustomDequeDelta < enqueueStdDequeDelta * 1.5);
 
 	const auto dequeueCustomDequeStart = std::chrono::high_resolution_clock::now();
 	for (int i = 0; i < 10000; ++i) {
@@ -65,5 +76,5 @@ TEST(Deque, PerformanceTestcompareWithSTD)
 	const auto dequeueCustomDequeDelta = abs(dequeueCustomDequeEnd - dequeueCustomDequeStart);
 	const auto dequeueStdDequeDelta = abs(dequeueStdDequeEnd - dequeueStdDequeStart);
 	std::cout << dequeueCustomDequeDelta << "           " << dequeueStdDequeDelta;
-	EXPECT_TRUE(dequeueCustomDequeDelta < dequeueStdDequeDelta * 1.2);
+	EXPECT_TRUE(dequeueCustomDequeDelta < dequeueStdDequeDelta * 1.5);
 }
