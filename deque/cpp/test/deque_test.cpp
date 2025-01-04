@@ -55,8 +55,12 @@ TEST(Deque, PerformanceTestcompareWithSTD)
 	const auto enqueueStdDequeEnd = std::chrono::high_resolution_clock::now();
 
 	EXPECT_EQ(customDeque.size(), stdDeque.size());
-	const auto enqueueCustomDequeDelta = abs(enqueueCustomDequeEnd - enqueueCustomDequeStart);
-	const auto enqueueStdDequeDelta = abs(enqueueStdDequeEnd - enqueueStdDequeStart);
+	const auto enqueueCustomDequeDelta = abs(
+	    enqueueCustomDequeEnd.time_since_epoch().count()
+	    - enqueueCustomDequeStart.time_since_epoch().count());
+	const auto enqueueStdDequeDelta = abs(
+	    enqueueStdDequeEnd.time_since_epoch().count()
+	    - enqueueStdDequeStart.time_since_epoch().count());
 	EXPECT_TRUE(enqueueCustomDequeDelta < enqueueStdDequeDelta * 1.5);
 
 	const auto dequeueCustomDequeStart = std::chrono::high_resolution_clock::now();
@@ -73,8 +77,12 @@ TEST(Deque, PerformanceTestcompareWithSTD)
 	const auto dequeueStdDequeEnd = std::chrono::high_resolution_clock::now();
 
 	EXPECT_EQ(customDeque.size(), stdDeque.size());
-	const auto dequeueCustomDequeDelta = abs(dequeueCustomDequeEnd - dequeueCustomDequeStart);
-	const auto dequeueStdDequeDelta = abs(dequeueStdDequeEnd - dequeueStdDequeStart);
+	const auto dequeueCustomDequeDelta = abs(
+	    dequeueCustomDequeEnd.time_since_epoch().count()
+	    - dequeueCustomDequeStart.time_since_epoch().count());
+	const auto dequeueStdDequeDelta = abs(
+	    dequeueStdDequeEnd.time_since_epoch().count()
+	    - dequeueStdDequeStart.time_since_epoch().count());
 	std::cout << dequeueCustomDequeDelta << "           " << dequeueStdDequeDelta;
 	EXPECT_TRUE(dequeueCustomDequeDelta < dequeueStdDequeDelta * 1.5);
 }
