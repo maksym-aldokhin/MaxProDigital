@@ -20,6 +20,7 @@ if(ENABLE_TESTING)
 	FetchContent_Declare(gtest
 		QUIET
 		URL https://github.com/google/googletest/releases/download/v1.15.2/googletest-1.15.2.tar.gz
+		DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 	)
 
 	set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
