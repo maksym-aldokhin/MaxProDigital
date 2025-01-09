@@ -1,21 +1,21 @@
 set(sources
-	deque.cpp
+	queue.cpp
 )
 
 set(headers
-	deque.h
+	queue.h
 )
 
-add_library(deque)
+add_library(queue)
 
-target_sources(deque
+target_sources(queue
 	PRIVATE
 		${sources}
 	PUBLIC
 		${headers}
-	)
+)
 
-target_include_directories(deque
+target_include_directories(queue
 	PUBLIC
 		${CMAKE_CURRENT_LIST_DIR}
-	)
+)

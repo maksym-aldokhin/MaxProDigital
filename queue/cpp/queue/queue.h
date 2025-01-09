@@ -1,7 +1,7 @@
 #include <stdexcept>
 
 template<typename T>
-class Deque
+class Queue
 {
 	struct Node
 	{
@@ -15,11 +15,11 @@ class Deque
 	};
 
 public:
-	Deque()
+	Queue()
 	{
 	}
 
-	~Deque()
+	~Queue()
 	{
 		while (m_front != nullptr) {
 			Node *temp = m_front;
@@ -48,7 +48,7 @@ public:
 	T dequeue()
 	{
 		if (isEmpty()) {
-			throw std::out_of_range("Deque is empty.");
+			throw std::out_of_range("Queue is empty.");
 		}
 		Node *temp = m_front;
 		T value = m_front->data;
@@ -71,7 +71,7 @@ public:
 	T head() const
 	{
 		if (isEmpty()) {
-			throw std::out_of_range("Deque is empty.");
+			throw std::out_of_range("Queue is empty.");
 		}
 		return m_front->data;
 	}

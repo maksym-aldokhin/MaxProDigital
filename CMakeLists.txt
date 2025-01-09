@@ -31,5 +31,5 @@ if(ENABLE_TESTING)
 	include(GoogleTest)
 endif()
 
-add_subdirectory(deque/cpp/deque)
-add_subdirectory(deque/cpp/test)
+add_subdirectory(queue/cpp/queue)
+add_subdirectory(queue/cpp/test)

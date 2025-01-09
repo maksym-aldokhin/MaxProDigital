@@ -3,50 +3,50 @@
 #include <chrono>
 #include <deque>
 
-#include "deque.h"
+#include "queue.h"
 
-TEST(Deque, CoreTestsEnqueue1value)
+TEST(Queue, CoreTestsEnqueue1value)
 {
-	Deque<int> deque;
-	deque.enqueue(10);
-	EXPECT_EQ(deque.size(), 1);
+	Queue<int> queue;
+	queue.enqueue(10);
+	EXPECT_EQ(queue.size(), 1);
 }
 
-TEST(Deque, CoreTestsEnqueueAndDequeue)
+TEST(Queue, CoreTestsEnqueueAndDequeue)
 {
-	Deque<int> deque;
+	Queue<int> queue;
 	const int expectedValue = 10;
 
-	deque.enqueue(expectedValue);
-	EXPECT_EQ(deque.size(), 1);
+	queue.enqueue(expectedValue);
+	EXPECT_EQ(queue.size(), 1);
 
-	const auto actualValue = deque.dequeue();
+	const auto actualValue = queue.dequeue();
 
-	EXPECT_EQ(deque.size(), 0);
+	EXPECT_EQ(queue.size(), 0);
 	EXPECT_EQ(actualValue, expectedValue);
 }
 
-TEST(Deque, CoreTestsHead)
+TEST(Queue, CoreTestsHead)
 {
-	Deque<int> deque;
+	Queue<int> queue;
 	const int expectedValue = 10;
 
-	deque.enqueue(expectedValue);
-	EXPECT_EQ(deque.size(), 1);
+	queue.enqueue(expectedValue);
+	EXPECT_EQ(queue.size(), 1);
 
-	EXPECT_EQ(deque.head(), expectedValue);
+	EXPECT_EQ(queue.head(), expectedValue);
 }
 
-TEST(Deque, PerformanceTestcompareWithSTD)
+TEST(Queue, PerformanceTestcompareWithSTD)
 {
 	// not work
 	return;
-	Deque<int> customDeque;
+	Queue<int> customQueue;
 	std::deque<int> stdDeque;
 
 	const auto enqueueCustomDequeStart = std::chrono::high_resolution_clock::now();
 	for (int i = 0; i < 10000; ++i) {
-		customDeque.enqueue(i);
+		customQueue.enqueue(i);
 	}
 	const auto enqueueCustomDequeEnd = std::chrono::high_resolution_clock::now();
 
@@ -56,7 +56,7 @@ TEST(Deque, PerformanceTestcompareWithSTD)
 	}
 	const auto enqueueStdDequeEnd = std::chrono::high_resolution_clock::now();
 
-	EXPECT_EQ(customDeque.size(), stdDeque.size());
+	EXPECT_EQ(customQueue.size(), stdDeque.size());
 	const auto enqueueCustomDequeDelta = abs(
 	    enqueueCustomDequeEnd.time_since_epoch().count()
 	    - enqueueCustomDequeStart.time_since_epoch().count());
@@ -67,7 +67,7 @@ TEST(Deque, PerformanceTestcompareWithSTD)
 
 	const auto dequeueCustomDequeStart = std::chrono::high_resolution_clock::now();
 	for (int i = 0; i < 10000; ++i) {
-		customDeque.dequeue();
+		customQueue.dequeue();
 	}
 	const auto dequeueCustomDequeEnd = std::chrono::high_resolution_clock::now();
 
@@ -78,7 +78,7 @@ TEST(Deque, PerformanceTestcompareWithSTD)
 	}
 	const auto dequeueStdDequeEnd = std::chrono::high_resolution_clock::now();
 
-	EXPECT_EQ(customDeque.size(), stdDeque.size());
+	EXPECT_EQ(customQueue.size(), stdDeque.size());
 	const auto dequeueCustomDequeDelta = abs(
 	    dequeueCustomDequeEnd.time_since_epoch().count()
 	    - dequeueCustomDequeStart.time_since_epoch().count());
