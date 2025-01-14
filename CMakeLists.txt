@@ -33,3 +33,6 @@ endif()
 
 add_subdirectory(queue/cpp/queue)
 add_subdirectory(queue/cpp/test)
+
+add_subdirectory(stack/cpp/src)
+add_subdirectory(stack/cpp/test)
