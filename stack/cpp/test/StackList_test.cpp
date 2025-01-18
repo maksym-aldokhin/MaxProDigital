@@ -26,6 +26,25 @@ TEST(StackList, CoreTestsPush100value)
 	EXPECT_EQ(stack.peek(), 99);
 }
 
+TEST(StackList, CoreTestsPushAndPop100value)
+{
+	std::vector<int> expected;
+	for (int i = 0; i < 100; ++i) {
+		expected.push_back(i);
+	}
+
+	StackList<int> stack;
+
+	for (const auto &v : expected) {
+		stack.push(v);
+	}
+	EXPECT_EQ(stack.size(), 100);
+
+	for (auto i = expected.size() - 1; i != 0; --i) {
+		EXPECT_EQ(stack.pop(), expected[i]);
+	}
+}
+
 TEST(StackList, CoreTestsPeekEmptyStack)
 {
 	const int expectedValue = 10;
