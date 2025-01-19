@@ -36,3 +36,6 @@ add_subdirectory(queue/cpp/test)
 
 add_subdirectory(stack/cpp/src)
 add_subdirectory(stack/cpp/test)
+
+add_subdirectory(trees/trie/cpp/src)
+add_subdirectory(trees/trie/cpp/test)
