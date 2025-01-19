@@ -4,7 +4,7 @@ template<typename T>
 class StackFixSize
 {
 public:
-	StackFixSize(T size)
+	explicit StackFixSize(T size)
 	    : m_size(size)
 	    , m_top(-1)
 	{

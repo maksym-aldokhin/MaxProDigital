@@ -4,7 +4,7 @@ template<typename T>
 class StackVectorUnlimited
 {
 public:
-	StackVectorUnlimited()
+	explicit StackVectorUnlimited()
 	    : m_arr(nullptr)
 	    , m_top(-1)
 	    , m_reserved(0)

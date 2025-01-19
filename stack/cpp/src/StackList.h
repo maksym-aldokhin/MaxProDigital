@@ -20,7 +20,7 @@ private:
 	size_t m_size;
 
 public:
-	StackList()
+	explicit StackList()
 	    : m_top(nullptr)
 	    , m_size{0}
 	{

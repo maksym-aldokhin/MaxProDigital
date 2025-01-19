@@ -15,7 +15,7 @@ class Queue
 	};
 
 public:
-	Queue()
+	explicit Queue()
 	{
 	}
 
