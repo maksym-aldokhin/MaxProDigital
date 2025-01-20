@@ -1,9 +1,11 @@
 set(sources
 	TrieTree.cpp
+	TrieTreePriority.cpp
 )
 
 set(headers
 	TrieTree.h
+	TrieTreePriority.h
 )
 
 add_library(tree_trie)

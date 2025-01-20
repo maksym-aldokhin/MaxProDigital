@@ -4,6 +4,7 @@ endif()
 
 add_executable(tree_trie_test
 	TrieTree_test.cpp
+	TrieTreePriority_test.cpp
 )
 
 target_link_libraries(tree_trie_test
