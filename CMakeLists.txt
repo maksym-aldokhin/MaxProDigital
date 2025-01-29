@@ -31,6 +31,9 @@ if(ENABLE_TESTING)
 	include(GoogleTest)
 endif()
 
+add_subdirectory(search/cpp/src)
+add_subdirectory(search/cpp/test)
+
 add_subdirectory(queue/cpp/queue)
 add_subdirectory(queue/cpp/test)
 
