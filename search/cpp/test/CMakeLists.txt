@@ -4,6 +4,7 @@ endif()
 
 add_executable(Search_test
 	LinerSearch_test.cpp
+	BinarySearch_test.cpp
 )
 
 target_link_libraries(Search_test
