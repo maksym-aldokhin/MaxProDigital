@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iterator>
 
 template<class InputIt, class T = typename std::iterator_traits<InputIt>::value_type>
