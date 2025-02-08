@@ -4,6 +4,7 @@ endif()
 
 add_executable(Sort_test
 	BubbleSort_test.cpp
+	SelectionSort_test.cpp
 )
 
 target_link_libraries(Sort_test

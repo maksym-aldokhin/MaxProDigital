@@ -69,4 +69,42 @@ void bubbleSort(Container &container, Direction direction = Direction::SmallToLa
 	bubbleSort(container.begin(), container.end(), direction);
 }
 
+template<std::bidirectional_iterator InputIt>
+void selectionSort(
+    const InputIt &begin, const InputIt &end, Direction direction = Direction::SmallToLarge)
+{
+	if (begin == end) {
+		return;
+	}
+
+	using ValueType = typename std::iter_value_t<InputIt>;
+	std::function<bool(const ValueType &, const ValueType &)> comparator;
+	if (direction == Direction::SmallToLarge) {
+		comparator = [&direction](const auto &first, const auto &second) {
+			return first < second;
+		};
+	} else {
+		comparator = [&direction](const auto &first, const auto &second) {
+			return first > second;
+		};
+	}
+
+	for (auto toSwapIt = begin; toSwapIt != std::prev(end); ++toSwapIt) {
+		auto fromSwapIt = toSwapIt;
+		for (auto it = std::next(toSwapIt); it != end; ++it) {
+			if (comparator(*it, *fromSwapIt)) {
+				fromSwapIt = it;
+			}
+		}
+		private_sort::swap(fromSwapIt, toSwapIt);
+	}
+}
+
+template<typename Container>
+    requires std::bidirectional_iterator<typename Container::iterator>
+void selectionSort(Container &container, Direction direction = Direction::SmallToLarge)
+{
+	selectionSort(container.begin(), container.end(), direction);
+}
+
 } // namespace sort
