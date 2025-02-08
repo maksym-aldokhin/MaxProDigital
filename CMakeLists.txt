@@ -34,6 +34,9 @@ endif()
 add_subdirectory(search/cpp/src)
 add_subdirectory(search/cpp/test)
 
+add_subdirectory(sort/cpp/src)
+add_subdirectory(sort/cpp/test)
+
 add_subdirectory(queue/cpp/queue)
 add_subdirectory(queue/cpp/test)
 
