@@ -107,4 +107,46 @@ void selectionSort(Container &container, Direction direction = Direction::SmallT
 	selectionSort(container.begin(), container.end(), direction);
 }
 
+template<std::bidirectional_iterator InputIt>
+void insertionSort(
+    const InputIt &begin, const InputIt &end, Direction direction = Direction::SmallToLarge)
+{
+	if (begin == end) {
+		return;
+	}
+
+	using ValueType = typename std::iter_value_t<InputIt>;
+	std::function<bool(const ValueType &, const ValueType &)> comparator;
+	if (direction == Direction::SmallToLarge) {
+		comparator = [&direction](const auto &first, const auto &second) {
+			return first > second;
+		};
+	} else {
+		comparator = [&direction](const auto &first, const auto &second) {
+			return first < second;
+		};
+	}
+
+	for (auto it = std::next(begin); it != end; ++it) {
+		const auto value = *it;
+		InputIt itToInsert = it;
+		for (; itToInsert != begin; --itToInsert) {
+			const auto prewIt = std::prev(itToInsert);
+			if (comparator(*prewIt, value)) {
+				*itToInsert = *prewIt;
+			} else {
+				break;
+			}
+		}
+		*itToInsert = value;
+	}
+}
+
+template<typename Container>
+    requires std::bidirectional_iterator<typename Container::iterator>
+void insertionSort(Container &container, Direction direction = Direction::SmallToLarge)
+{
+	insertionSort(container.begin(), container.end(), direction);
+}
+
 } // namespace sort

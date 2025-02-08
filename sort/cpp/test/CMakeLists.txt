@@ -4,6 +4,7 @@ endif()
 
 add_executable(Sort_test
 	BubbleSort_test.cpp
+	InsertionSort_test.cpp
 	SelectionSort_test.cpp
 )
 
