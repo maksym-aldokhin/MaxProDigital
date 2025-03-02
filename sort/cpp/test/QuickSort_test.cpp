@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-// #include <list>
+#include <list>
 #include <vector>
 
 #include <Sort.h>
