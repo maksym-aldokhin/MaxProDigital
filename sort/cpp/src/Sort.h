@@ -149,4 +149,74 @@ void insertionSort(Container &container, Direction direction = Direction::SmallT
 	insertionSort(container.begin(), container.end(), direction);
 }
 
+namespace private_sort {
+
+template<std::bidirectional_iterator InputIt>
+InputIt partition(
+    InputIt begin,
+    InputIt end,
+    std::function<bool(
+        const typename std::iterator_traits<InputIt>::value_type &,
+        const typename std::iterator_traits<InputIt>::value_type &)> comparator)
+{
+	auto pivot = std::prev(end);
+
+	auto insertIt = begin;
+	for (auto it = begin; it != pivot; ++it) {
+		if (comparator(*it, *pivot)) {
+			private_sort::swap(insertIt, it);
+			insertIt = std::next(insertIt);
+		}
+	}
+	private_sort::swap(insertIt, pivot);
+
+	return insertIt;
+}
+
+template<std::bidirectional_iterator InputIt>
+void quickSortPrivate(
+    InputIt begin,
+    InputIt end,
+    std::function<bool(
+        const typename std::iterator_traits<InputIt>::value_type &,
+        const typename std::iterator_traits<InputIt>::value_type &)> comparator)
+{
+	if (std::distance(begin, end) <= 1) {
+		return;
+	}
+
+	const auto pivot = partition(begin, end, comparator);
+
+	quickSortPrivate(begin, pivot, comparator);
+	quickSortPrivate(std::next(pivot), end, comparator);
+}
+
+} // namespace private_sort
+
+template<std::bidirectional_iterator InputIt>
+void quickSort(InputIt begin, InputIt end, Direction direction = Direction::SmallToLarge)
+{
+	std::function<bool(
+	    const typename std::iterator_traits<InputIt>::value_type &,
+	    const typename std::iterator_traits<InputIt>::value_type &)>
+	    comparator;
+	if (direction == Direction::SmallToLarge) {
+		comparator = [&direction](const auto &first, const auto &second) {
+			return first < second;
+		};
+	} else {
+		comparator = [&direction](const auto &first, const auto &second) {
+			return first > second;
+		};
+	}
+	private_sort::quickSortPrivate(begin, end, comparator);
+}
+
+template<typename Container>
+    requires std::bidirectional_iterator<typename Container::iterator>
+void quickSort(Container &container, Direction direction = Direction::SmallToLarge)
+{
+	quickSort(container.begin(), container.end(), direction);
+}
+
 } // namespace sort
